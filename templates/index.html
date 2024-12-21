@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Player</title>
+  <style>
+    /* Inline CSS */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #b3acac;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .music-player {
+      background: #ea9393;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 400px;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .music-list h2 {
+      color: #555;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .music-list ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .music-list li {
+      margin: 10px 0;
+    }
+
+    .music-list button {
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .music-list button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="music-player">
+    <h1>Web Music Player</h1>
+
+    <!-- Audio player -->
+    <audio id="audioPlayer" controls>
+      <source src="" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+
+    <!-- Music list -->
+    <div class="music-list">
+      <h2>Available Tracks</h2>
+      <ul id="trackList">
+        {% for file in audio_files %}
+        <li>
+          <button onclick="playMusic('{{ file }}')">{{ file }}</button>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function playMusic(filename) {
+      const audioPlayer = document.getElementById('audioPlayer');
+      audioPlayer.src = `/play/${filename}`;
+      audioPlayer.play();
+    }
+  </script>
+</body>
+</html>
